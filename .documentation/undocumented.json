@@ -1,0 +1,61 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/reddavis/Documents/Projects/Validate/Validate/Source/Extensions/Sequence+Extension.swift",
+      "line": 6,
+      "symbol": "Sequence.localizedDescriptions",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/reddavis/Documents/Projects/Validate/Validate/Source/Validate.swift",
+      "line": 29,
+      "symbol": "Validate.projectedValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/reddavis/Documents/Projects/Validate/Validate/Source/Validation.swift",
+      "line": 7,
+      "symbol": "Validation.Validate",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/reddavis/Documents/Projects/Validate/Validate/Source/Validation.swift",
+      "line": 8,
+      "symbol": "Validation.validate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/reddavis/Documents/Projects/Validate/Validate/Source/Validations/Count.swift",
+      "line": 8,
+      "symbol": "Validation.CountGreaterThanErrorMessageBuilder",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/reddavis/Documents/Projects/Validate/Validate/Source/Validations/Count.swift",
+      "line": 88,
+      "symbol": "Validation.CountLessThanErrorMessageBuilder",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/reddavis/Documents/Projects/Validate/Validate/Source/Validations/Count.swift",
+      "line": 168,
+      "symbol": "Validation.CountEqualToErrorMessageBuilder",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/reddavis/Documents/Projects/Validate/Validate/Source/Validations/Count.swift",
+      "line": 247,
+      "symbol": "Validation.CountRangeErrorMessageBuilder",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/reddavis/Documents/Projects/Validate"
+}

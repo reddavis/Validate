@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a title="  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html"> Docs</a> (79% documented)</p>
+        <div class="header-right">
+          <form role="search" action="search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </div>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html"> Reference</a>
+        <img id="carat" src="img/carat.png" alt=""/>
+          Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Extensions/Sequence.html">Sequence</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/Validate.html">Validate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Validation.html">Validation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ValidationError.html">ValidationError</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <h1 id='validate' class='heading'>Validate</h1>
+
+<p>A property wrapper that can validate the property it wraps.</p>
+
+<p>When the wrapped value changes <code><a href="Structs/Validate.html">@Validate</a></code> will run the provided validations against the value.</p>
+
+<p>Once validated, the <code>isValid</code> and <code>errors</code> properties can provide validation results.</p>
+
+<p>The <code><a href="Structs/Validate.html">Validate</a></code> framwork contains a number of built in validations such as presence, count and format. All which a various array of types.</p>
+<h2 id='requirements' class='heading'>Requirements</h2>
+
+<ul>
+<li>iOS 15.0+</li>
+<li>macOS 12.0+</li>
+</ul>
+<h2 id='installation' class='heading'>Installation</h2>
+<h3 id='swift-package-manager' class='heading'>Swift Package Manager</h3>
+<pre class="highlight swift"><code><span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
+    <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/reddavis/Validate"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"2.0.0"</span><span class="p">)</span>
+<span class="p">]</span>
+</code></pre>
+<h2 id='note' class='heading'>Note</h2>
+
+<p>Worth noting Validate is still in very early days and API&rsquo;s are expected to change. Saying that, <a href="https://semver.org">SEMVER</a> will be kept.</p>
+<h2 id='documentation' class='heading'>Documentation</h2>
+
+<p><a href="">API Reference</a></p>
+<h2 id='usage' class='heading'>Usage</h2>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">SwiftUI</span>
+<span class="kd">import</span> <span class="kt">Validate</span>
+
+
+<span class="kd">struct</span> <span class="kt">ContentView</span><span class="p">:</span> <span class="kt">View</span>
+<span class="p">{</span>
+    <span class="kd">@Validate</span><span class="p">(</span><span class="o">.</span><span class="nf">presence</span><span class="p">())</span> <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">""</span>
+
+    <span class="k">var</span> <span class="nv">body</span><span class="p">:</span> <span class="kd">some</span> <span class="kt">View</span> <span class="p">{</span>
+        <span class="kt">VStack</span><span class="p">(</span><span class="nv">spacing</span><span class="p">:</span> <span class="mi">60</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">VStack</span> <span class="p">{</span>
+                <span class="kt">TextField</span><span class="p">(</span><span class="s">"Name"</span><span class="p">,</span> <span class="nv">text</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="err">$</span><span class="n">name</span><span class="p">)</span>
+                    <span class="o">.</span><span class="nf">textFieldStyle</span><span class="p">(</span><span class="o">.</span><span class="n">roundedBorder</span><span class="p">)</span>
+                    <span class="o">.</span><span class="nf">padding</span><span class="p">()</span>
+
+                <span class="kt">VStack</span> <span class="p">{</span>
+                    <span class="kt">ForEach</span><span class="p">(</span><span class="k">self</span><span class="o">.</span><span class="n">_name</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">localizedDescriptions</span><span class="p">,</span> <span class="nv">id</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">message</span> <span class="k">in</span>
+                        <span class="kt">Text</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+                            <span class="o">.</span><span class="nf">foregroundColor</span><span class="p">(</span><span class="o">.</span><span class="n">red</span><span class="p">)</span>
+                            <span class="o">.</span><span class="nf">font</span><span class="p">(</span><span class="o">.</span><span class="n">footnote</span><span class="p">)</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+
+            <span class="kt">Button</span><span class="p">(</span><span class="s">"Save"</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nf">print</span><span class="p">(</span><span class="k">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="o">.</span><span class="nf">buttonStyle</span><span class="p">(</span><span class="o">.</span><span class="n">bordered</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<h2 id='built-in-validations' class='heading'>Built in validations</h2>
+
+<p>Validate includes several validations:</p>
+
+<ul>
+<li><a href="">Count</a></li>
+<li><a href="">Presence</a></li>
+<li><a href="">Format</a></li>
+</ul>
+<h2 id='other-libraries' class='heading'>Other Libraries</h2>
+
+<p>Check out some of my other libraries:</p>
+
+<ul>
+<li><a href="https://github.com/reddavis/Papyrus">Papyrus</a> - Papyrus aims to hit the sweet spot between saving raw API responses to the file system and a fully fledged database like Realm.</li>
+<li><a href="https://github.com/reddavis/RedUx">RedUx</a> - A super simple Swift implementation of the redux pattern making use of Swift 5.5&rsquo;s new async await API&rsquo;s.</li>
+<li><a href="https://github.com/reddavis/Kyu">Kyu</a> - A persistent queue system in Swift.</li>
+<li><a href="https://github.com/reddavis/FloatingLabelTextFieldStyle">FloatingLabelTextFieldStyle</a> - A floating label style for SwiftUI&rsquo;s TextField.</li>
+<li><a href="https://github.com/reddavis/Panel">Panel</a> - A panel component similar to the iOS Airpod battery panel.</li>
+</ul>
+<h2 id='license' class='heading'>License</h2>
+
+<p>Whatevs.</p>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2021 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2021-10-20)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>

@@ -27,6 +27,10 @@ dependencies: [
 
 Worth noting Validate is still in very early days and API's are expected to change. Saying that, [SEMVER](https://semver.org) will be kept.
 
+## Documentation
+
+[API Reference]()
+
 ## Usage
 
 ```swift
@@ -62,6 +66,14 @@ struct ContentView: View
     }
 }
 ```
+
+## Built in validations
+
+Validate includes several validations:
+
+- [Count](https://github.com/reddavis/Validate/blob/main/Validate/Source/Validations/Count.swift)
+- [Presence](https://github.com/reddavis/Validate/blob/main/Validate/Source/Validations/Presence.swift)
+- [Format](https://github.com/reddavis/Validate/blob/main/Validate/Source/Validations/Format.swift)
 
 ## Other Libraries
 
