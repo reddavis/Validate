@@ -29,7 +29,7 @@ Worth noting Validate is still in very early days and API's are expected to chan
 
 ## Documentation
 
-[API Reference]()
+[API Reference](https://swift-validate.netlify.app)
 
 ## Usage
 
@@ -75,7 +75,36 @@ Validate includes several validations:
 - [Presence](https://github.com/reddavis/Validate/blob/main/Validate/Source/Validations/Presence.swift)
 - [Format](https://github.com/reddavis/Validate/blob/main/Validate/Source/Validations/Format.swift)
 
-## Other Libraries
+## Building validations
+
+You're not just limited to using the built in validations but can build your own by using the [`Validation`](https://github.com/reddavis/Validate/blob/main/Validate/Source/Validation.swift) builder.
+
+This is how the built in presence validation is built:
+
+```swift
+public extension Validation
+{
+    /// Validate an optional value is present.
+    ///
+    /// If the value is nil, it is considered invalid.
+    /// - Parameters:
+    ///   - message: A custom error message.
+    /// - Returns: A Validation instance.
+    static func presence<T>(
+        message: String? = nil
+    ) -> Validation<Optional<T>>
+    {
+        .init { value in
+            if value == nil
+            {
+                throw ValidationError.build(message: message)
+            }
+        }
+    }
+}
+```
+
+## Other libraries
 
 Check out some of my other libraries:
 

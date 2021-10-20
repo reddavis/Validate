@@ -88,7 +88,7 @@
 <p>Worth noting Validate is still in very early days and API&rsquo;s are expected to change. Saying that, <a href="https://semver.org">SEMVER</a> will be kept.</p>
 <h2 id='documentation' class='heading'>Documentation</h2>
 
-<p><a href="">API Reference</a></p>
+<p><a href="https://swift-validate.netlify.app">API Reference</a></p>
 <h2 id='usage' class='heading'>Usage</h2>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">SwiftUI</span>
 <span class="kd">import</span> <span class="kt">Validate</span>
@@ -127,11 +127,37 @@
 <p>Validate includes several validations:</p>
 
 <ul>
-<li><a href="">Count</a></li>
-<li><a href="">Presence</a></li>
-<li><a href="">Format</a></li>
+<li><a href="https://github.com/reddavis/Validate/blob/main/Validate/Source/Validations/Count.swift">Count</a></li>
+<li><a href="https://github.com/reddavis/Validate/blob/main/Validate/Source/Validations/Presence.swift">Presence</a></li>
+<li><a href="https://github.com/reddavis/Validate/blob/main/Validate/Source/Validations/Format.swift">Format</a></li>
 </ul>
-<h2 id='other-libraries' class='heading'>Other Libraries</h2>
+<h2 id='building-validations' class='heading'>Building validations</h2>
+
+<p>You&rsquo;re not just limited to using the built in validations but can build your own by using the <a href="https://github.com/reddavis/Validate/blob/main/Validate/Source/Validation.swift"><code><a href="Structs/Validation.html">Validation</a></code></a> builder.</p>
+
+<p>This is how the built in presence validation is built:</p>
+<pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">extension</span> <span class="kt">Validation</span>
+<span class="p">{</span>
+    <span class="c1">/// Validate an optional value is present.</span>
+    <span class="c1">///</span>
+    <span class="c1">/// If the value is nil, it is considered invalid.</span>
+    <span class="c1">/// - Parameters:</span>
+    <span class="c1">///   - message: A custom error message.</span>
+    <span class="c1">/// - Returns: A Validation instance.</span>
+    <span class="kd">static</span> <span class="kd">func</span> <span class="n">presence</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span>
+        <span class="nv">message</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Validation</span><span class="o">&lt;</span><span class="kt">Optional</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;&gt;</span>
+    <span class="p">{</span>
+        <span class="o">.</span><span class="kd">init</span> <span class="p">{</span> <span class="n">value</span> <span class="k">in</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="kc">nil</span>
+            <span class="p">{</span>
+                <span class="k">throw</span> <span class="kt">ValidationError</span><span class="o">.</span><span class="nf">build</span><span class="p">(</span><span class="nv">message</span><span class="p">:</span> <span class="n">message</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<h2 id='other-libraries' class='heading'>Other libraries</h2>
 
 <p>Check out some of my other libraries:</p>
 
