@@ -42,7 +42,7 @@ public struct Validate<Value>: DynamicProperty
     public var isValid: Bool { self.errors.isEmpty }
     
     // Private
-    @ObservedObject var validator: Validator<Value>
+    @ObservedObject private var validator: Validator<Value>
     
     // MARK: Initialization
     
