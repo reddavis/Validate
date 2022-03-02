@@ -16,8 +16,7 @@ import SwiftUI
 /// If the included validations don't quite do what is required, new validations
 /// can be built with the `Validation` struct.
 @propertyWrapper
-public struct Validate<Value>: DynamicProperty
-{
+public struct Validate<Value>: DynamicProperty {
     /// The wrapped value
     public var wrappedValue: Value {
         get { self.validator.value }
@@ -53,8 +52,7 @@ public struct Validate<Value>: DynamicProperty
     public init(
         wrappedValue: Value,
         _ validations: Validation<Value>...
-    )
-    {
+    ) {
         self.init(wrappedValue: wrappedValue, validations: validations)
     }
     
@@ -65,21 +63,27 @@ public struct Validate<Value>: DynamicProperty
     public init<T>(
         wrappedValue: Value,
         _ validations: Validation<Value>...
-    ) where Value == Optional<T>
-    {
+    ) where Value == Optional<T> {
         self.init(wrappedValue: wrappedValue, validations: validations)
     }
     
     init(
         wrappedValue: Value,
         validations: [Validation<Value>]
-    )
-    {
+    ) {
         self._validator = ObservedObject(
             wrappedValue: Validator(
                 value: wrappedValue,
                 validations: validations
             )
         )
+    }
+}
+
+// MARK: Equatable
+
+extension Validate: Equatable where Value: Equatable {
+    public static func ==(lhs: Validate, rhs: Validate) -> Bool {
+        lhs.wrappedValue == rhs.wrappedValue
     }
 }
