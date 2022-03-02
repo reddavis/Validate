@@ -3,8 +3,7 @@ import Foundation
 
 // MARK: Greater than
 
-public extension Validation
-{
+public extension Validation {
     typealias CountGreaterThanErrorMessageBuilder = (_ minimum: Int) -> String
     
     /// Validate a collection's count is greater than a minimum amount.
@@ -15,11 +14,9 @@ public extension Validation
     static func count<T: Collection>(
         greaterThan minimum: Int,
         message: CountGreaterThanErrorMessageBuilder? = nil
-    ) -> Validation<T>
-    {
+    ) -> Validation<T> {
         .init { value in
-            guard value.count > minimum else
-            {
+            guard value.count > minimum else {
                 throw ValidationError.buildGreaterThan(
                     minimum: minimum,
                     message: message
@@ -38,12 +35,10 @@ public extension Validation
     static func count<T: Collection>(
         greaterThan minimum: Int,
         message: CountGreaterThanErrorMessageBuilder? = nil
-    ) -> Validation<Optional<T>>
-    {
+    ) -> Validation<Optional<T>> {
         .init { value in
             guard let value = value,
-                  value.count > minimum else
-            {
+                  value.count > minimum else {
                 throw ValidationError.buildGreaterThan(
                     minimum: minimum,
                     message: message
@@ -56,10 +51,8 @@ public extension Validation
 
 // MARK: Greater than error
 
-extension ValidationError
-{
-    private static func greaterThan(minimum: Int) -> ValidationError
-    {
+extension ValidationError {
+    private static func greaterThan(minimum: Int) -> ValidationError {
         .init(description: "Should be greater than \(minimum)")
     }
     
@@ -68,10 +61,8 @@ extension ValidationError
     fileprivate static func buildGreaterThan(
         minimum: Int,
         message: Validation.CountGreaterThanErrorMessageBuilder?
-    ) -> ValidationError
-    {
-        guard let message = message else
-        {
+    ) -> ValidationError {
+        guard let message = message else {
             return ValidationError.greaterThan(minimum: minimum)
         }
         
@@ -83,8 +74,7 @@ extension ValidationError
 
 // MARK: Less than
 
-public extension Validation
-{
+public extension Validation {
     typealias CountLessThanErrorMessageBuilder = (_ maximum: Int) -> String
     
     /// Validate a collection's count is less than a maximum amount.
@@ -95,11 +85,9 @@ public extension Validation
     static func count<T: Collection>(
         lessThan maximum: Int,
         message: CountLessThanErrorMessageBuilder? = nil
-    ) -> Validation<T>
-    {
+    ) -> Validation<T> {
         .init { value in
-            guard value.count < maximum else
-            {
+            guard value.count < maximum else {
                 throw ValidationError.buildLessThan(
                     maximum: maximum,
                     message: message
@@ -118,12 +106,10 @@ public extension Validation
     static func count<T: Collection>(
         lessThan maximum: Int,
         message: CountLessThanErrorMessageBuilder? = nil
-    ) -> Validation<Optional<T>>
-    {
+    ) -> Validation<Optional<T>> {
         .init { value in
             guard let value = value,
-                  value.count < maximum else
-            {
+                  value.count < maximum else {
                 throw ValidationError.buildLessThan(
                     maximum: maximum,
                     message: message
@@ -136,10 +122,8 @@ public extension Validation
 
 // MARK: Less than error
 
-extension ValidationError
-{
-    private static func lessThan(maximum: Int) -> ValidationError
-    {
+extension ValidationError {
+    private static func lessThan(maximum: Int) -> ValidationError {
         .init(description: "Should be less than \(maximum)")
     }
     
@@ -148,10 +132,8 @@ extension ValidationError
     fileprivate static func buildLessThan(
         maximum: Int,
         message: Validation.CountLessThanErrorMessageBuilder?
-    ) -> ValidationError
-    {
-        guard let message = message else
-        {
+    ) -> ValidationError {
+        guard let message = message else {
             return ValidationError.lessThan(maximum: maximum)
         }
         
@@ -163,8 +145,7 @@ extension ValidationError
 
 // MARK: Equal to
 
-public extension Validation
-{
+public extension Validation {
     typealias CountEqualToErrorMessageBuilder = (_ value: Int) -> String
     
     /// Validate a collection's count is equal to an amount.
@@ -175,11 +156,9 @@ public extension Validation
     static func count<T: Collection>(
         equalTo count: Int,
         message: CountEqualToErrorMessageBuilder? = nil
-    ) -> Validation<T>
-    {
+    ) -> Validation<T> {
         .init { value in
-            guard value.count == count else
-            {
+            guard value.count == count else {
                 throw ValidationError.buildEqualTo(
                     value: count,
                     message: message
@@ -198,12 +177,11 @@ public extension Validation
     static func count<T: Collection>(
         equalTo count: Int,
         message: CountEqualToErrorMessageBuilder? = nil
-    ) -> Validation<Optional<T>>
-    {
+    ) -> Validation<Optional<T>> {
         .init { value in
-            guard let value = value,
-                  value.count == count else
-            {
+            guard
+                let value = value,
+                value.count == count else {
                 throw ValidationError.buildEqualTo(
                     value: count,
                     message: message
@@ -216,10 +194,8 @@ public extension Validation
 
 // MARK: Equal to error
 
-extension ValidationError
-{
-    private static func equalTo(value: Int) -> ValidationError
-    {
+extension ValidationError {
+    private static func equalTo(value: Int) -> ValidationError {
         .init(description: "Should be equal to \(value)")
     }
     
@@ -228,10 +204,8 @@ extension ValidationError
     fileprivate static func buildEqualTo(
         value: Int,
         message: Validation.CountEqualToErrorMessageBuilder?
-    ) -> ValidationError
-    {
-        guard let message = message else
-        {
+    ) -> ValidationError {
+        guard let message = message else {
             return ValidationError.equalTo(value: value)
         }
         
@@ -242,8 +216,7 @@ extension ValidationError
 
 // MARK: In
 
-public extension Validation
-{
+public extension Validation {
     typealias CountRangeErrorMessageBuilder = (_ range: ClosedRange<Int>) -> String
     
     /// Validate a collection's count is in a range.
@@ -254,11 +227,9 @@ public extension Validation
     static func count<T: Collection>(
         in range: ClosedRange<Int>,
         message: CountRangeErrorMessageBuilder? = nil
-    ) -> Validation<T>
-    {
+    ) -> Validation<T> {
         .init { value in
-            guard range.contains(value.count) else
-            {
+            guard range.contains(value.count) else {
                 throw ValidationError.buildRange(
                     range: range,
                     message: message
@@ -277,12 +248,10 @@ public extension Validation
     static func count<T: Collection>(
         in range: ClosedRange<Int>,
         message: CountRangeErrorMessageBuilder? = nil
-    ) -> Validation<Optional<T>>
-    {
+    ) -> Validation<Optional<T>> {
         .init { value in
             guard let value = value,
-                  range.contains(value.count) else
-            {
+                  range.contains(value.count) else {
                 throw ValidationError.buildRange(
                     range: range,
                     message: message
@@ -296,10 +265,8 @@ public extension Validation
 
 // MARK: Error
 
-extension ValidationError
-{
-    private static func range(range: ClosedRange<Int>) -> ValidationError
-    {
+extension ValidationError {
+    private static func range(range: ClosedRange<Int>) -> ValidationError {
         .init(description: "Should be between \(range.lowerBound) and \(range.upperBound)")
     }
     
@@ -308,10 +275,8 @@ extension ValidationError
     fileprivate static func buildRange(
         range: ClosedRange<Int>,
         message: Validation.CountRangeErrorMessageBuilder?
-    ) -> ValidationError
-    {
-        guard let message = message else
-        {
+    ) -> ValidationError {
+        guard let message = message else {
             return ValidationError.range(range: range)
         }
         

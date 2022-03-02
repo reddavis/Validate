@@ -1,8 +1,7 @@
 import Foundation
 
 
-public extension Validation
-{
+public extension Validation {
     /// Validate a string matches a regular expression.
     /// - Parameters:
     ///   - pattern: The regular expression pattern.
@@ -14,8 +13,7 @@ public extension Validation
         _ pattern: String,
         options: NSRegularExpression.Options = [],
         message: String? = nil
-    ) -> Validation<String>
-    {
+    ) -> Validation<String> {
         .init { value in
             let regex = NSRegularExpression(pattern, options: options)
             guard !regex.matches(value) else { return }
@@ -35,11 +33,9 @@ public extension Validation
         _ pattern: String,
         options: NSRegularExpression.Options = [],
         message: String? = nil
-    ) -> Validation<Optional<String>>
-    {
+    ) -> Validation<Optional<String>> {
         .init { value in
-            guard let value = value else
-            {
+            guard let value = value else {
                 throw ValidationError.build(message: message)
             }
             
@@ -55,19 +51,15 @@ public extension Validation
 
 // MARK: Error
 
-extension ValidationError
-{
-    private static func format() -> ValidationError
-    {
+extension ValidationError {
+    private static func format() -> ValidationError {
         .init(description: "Is incorrectly formatted")
     }
     
     // MARK: Builder
     
-    fileprivate static func build(message: String?) -> ValidationError
-    {
-        guard let message = message else
-        {
+    fileprivate static func build(message: String?) -> ValidationError {
+        guard let message = message else {
             return ValidationError.format()
         }
         

@@ -23,10 +23,6 @@ dependencies: [
 ]
 ```
 
-## Note
-
-Worth noting Validate is still in very early days and API's are expected to change. Saying that, [SEMVER](https://semver.org) will be kept.
-
 ## Documentation
 
 [API Reference](https://swift-validate.netlify.app)
@@ -38,8 +34,7 @@ import SwiftUI
 import Validate
 
 
-struct ContentView: View
-{
+struct ContentView: View {
     @Validate(.presence()) var name: String = ""
     
     var body: some View {
@@ -82,8 +77,7 @@ You're not just limited to using the built in validations but can build your own
 This is how the built in presence validation is built:
 
 ```swift
-public extension Validation
-{
+public extension Validation {
     /// Validate an optional value is present.
     ///
     /// If the value is nil, it is considered invalid.
@@ -92,11 +86,9 @@ public extension Validation
     /// - Returns: A Validation instance.
     static func presence<T>(
         message: String? = nil
-    ) -> Validation<Optional<T>>
-    {
+    ) -> Validation<Optional<T>> {
         .init { value in
-            if value == nil
-            {
+            if value == nil {
                 throw ValidationError.build(message: message)
             }
         }

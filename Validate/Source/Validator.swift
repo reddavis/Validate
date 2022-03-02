@@ -1,8 +1,7 @@
 import SwiftUI
 
 
-final class Validator<Value>: ObservableObject
-{
+final class Validator<Value>: ObservableObject {
     var value: Value {
         didSet {
             self.validate()
@@ -18,8 +17,7 @@ final class Validator<Value>: ObservableObject
     
     // MARK: Initialization
     
-    init(value: Value, validations: [Validation<Value>])
-    {
+    init(value: Value, validations: [Validation<Value>]) {
         self.value = value
         self.validations = validations
         self.validate()
@@ -27,16 +25,12 @@ final class Validator<Value>: ObservableObject
     
     // Validate
     
-    private func validate()
-    {
+    private func validate() {
         self.errors = self.validations.compactMap { validation in
-            do
-            {
+            do {
                 try validation.validate(self.value)
                 return nil
-            }
-            catch
-            {
+            } catch {
                 return error
             }
         }
