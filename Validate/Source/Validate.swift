@@ -25,7 +25,14 @@ public struct Validate<Value>: DynamicProperty {
         }
     }
     
-    public var projectedValue: Binding<Value> {
+    public var projectedValue: Validate<Value> {
+        self
+    }
+    
+    /// Create a binding for the wrapped value.
+    ///
+    /// This is useful for working with SwiftUI components.
+    public var binding: Binding<Value> {
         Binding(
             get: { self.wrappedValue },
             set: { self.wrappedValue = $0 }

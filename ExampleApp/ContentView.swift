@@ -9,12 +9,12 @@ struct ContentView: View
     var body: some View {
         VStack(spacing: 60) {
             VStack {
-                TextField("Name", text: self.$name)
+                TextField("Name", text: self.$name.binding)
                     .textFieldStyle(.roundedBorder)
                     .padding()
                 
                 VStack {
-                    ForEach(self._name.errors.localizedDescriptions, id: \.self) { message in
+                    ForEach(self.$name.errors.localizedDescriptions, id: \.self) { message in
                         Text(message)
                             .foregroundColor(.red)
                             .font(.footnote)
