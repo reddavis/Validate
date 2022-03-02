@@ -2,10 +2,8 @@ import XCTest
 @testable import Validate
 
 
-class PresenceValidationTests: XCTestCase
-{
-    func testPresenceValidation() throws
-    {
+class PresenceValidationTests: XCTestCase {
+    func testPresenceValidation() throws {
         @Validate(.presence()) var value: Int? = nil
         XCTAssertFalse(_value.isValid)
         
@@ -13,8 +11,7 @@ class PresenceValidationTests: XCTestCase
         XCTAssert(_value.isValid)
     }
     
-    func testPresenceValidationForOptionalString()
-    {
+    func testPresenceValidationForOptionalString() {
         @Validate(.presence(allowEmpty: true)) var blankAllowed: String? = nil
         XCTAssertFalse(_blankAllowed.isValid)
         blankAllowed = ""
@@ -28,8 +25,7 @@ class PresenceValidationTests: XCTestCase
         XCTAssert(_blankNotAllowed.isValid)
     }
 
-    func testPresenceValidationForString()
-    {
+    func testPresenceValidationForString() {
         @Validate(.presence()) var value: String = ""
         XCTAssertFalse(_value.isValid)
         value = "a"
@@ -38,8 +34,7 @@ class PresenceValidationTests: XCTestCase
     
     // MARK: Errors
     
-    func testPresenceErrorMessage() throws
-    {
+    func testPresenceErrorMessage() throws {
         @Validate(.presence()) var value: Int? = nil
         XCTAssertEqual(_value.errors.count, 1)
         
@@ -47,8 +42,7 @@ class PresenceValidationTests: XCTestCase
         XCTAssertEqual(error.errorDescription, "Can't be blank")
     }
     
-    func testCustomErrorMessage() throws
-    {
+    func testCustomErrorMessage() throws {
         let message = "this is a message"
         @Validate(
             .presence(
@@ -75,8 +69,7 @@ class PresenceValidationTests: XCTestCase
         XCTAssertEqual(error.errorDescription, message)
     }
     
-    func testCustomErrorMessageForOptionalString() throws
-    {
+    func testCustomErrorMessageForOptionalString() throws {
         let message = "this is a message"
         @Validate(
             .presence(

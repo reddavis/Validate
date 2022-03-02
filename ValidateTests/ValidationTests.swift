@@ -2,10 +2,8 @@ import XCTest
 @testable import Validate
 
 
-class ValidationTests: XCTestCase
-{
-    func testSingleValidationErrors()
-    {
+class ValidationTests: XCTestCase {
+    func testSingleValidationErrors() {
         @Validate(.presence()) var value: Int? = nil
         XCTAssertEqual(_value.errors.count, 1)
         
@@ -13,8 +11,7 @@ class ValidationTests: XCTestCase
         XCTAssertEqual(_value.errors.count, 0)
     }
     
-    func testMultipleValidationErrors()
-    {
+    func testMultipleValidationErrors() {
         @Validate(.count(greaterThan: 2), .count(equalTo: 4))
         var value: String = ""
         

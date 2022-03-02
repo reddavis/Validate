@@ -2,10 +2,8 @@ import XCTest
 @testable import Validate
 
 
-class FormatValidationTests: XCTestCase
-{
-    func testFormatValidation()
-    {
+class FormatValidationTests: XCTestCase {
+    func testFormatValidation() {
         @Validate(.format("\\d{3}")) var value: String = ""
         XCTAssertFalse(_value.isValid)
 
@@ -13,8 +11,7 @@ class FormatValidationTests: XCTestCase
         XCTAssert(_value.isValid)
     }
 
-    func testFormatValidationForOptionalString()
-    {
+    func testFormatValidationForOptionalString() {
         @Validate(.format("\\d{3}")) var value: String? = nil
         XCTAssertFalse(_value.isValid)
 
@@ -27,8 +24,7 @@ class FormatValidationTests: XCTestCase
     
     // MARK: Errors
     
-    func testFormatErrorMessage() throws
-    {
+    func testFormatErrorMessage() throws {
         @Validate(.format("\\d{3}")) var value: String = ""
         XCTAssertEqual(_value.errors.count, 1)
         
@@ -36,8 +32,7 @@ class FormatValidationTests: XCTestCase
         XCTAssertEqual(error.errorDescription, "Is incorrectly formatted")
     }
     
-    func testCustomErrorMessage() throws
-    {
+    func testCustomErrorMessage() throws {
         let message = "this is a message"
         @Validate(
             .format(
@@ -51,8 +46,7 @@ class FormatValidationTests: XCTestCase
         XCTAssertEqual(error.errorDescription, message)
     }
     
-    func testCustomErrorMessageForOptionalString() throws
-    {
+    func testCustomErrorMessageForOptionalString() throws {
         let message = "this is a message"
         @Validate(
             .format(

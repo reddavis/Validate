@@ -2,12 +2,10 @@ import XCTest
 @testable import Validate
 
 
-class CountValidationTests: XCTestCase
-{
+class CountValidationTests: XCTestCase {
     // MARK: Greater than
     
-    func testCountGreaterThanValidation()
-    {
+    func testCountGreaterThanValidation() {
         @Validate(.count(greaterThan: 3)) var value: String = ""
         XCTAssertFalse(_value.isValid)
 
@@ -18,8 +16,7 @@ class CountValidationTests: XCTestCase
         XCTAssert(_value.isValid)
     }
  
-    func testCountGreaterThanForOptionalValidation()
-    {
+    func testCountGreaterThanForOptionalValidation() {
         @Validate(.count(greaterThan: 3)) var value: String? = nil
         XCTAssertFalse(_value.isValid)
 
@@ -30,24 +27,21 @@ class CountValidationTests: XCTestCase
         XCTAssert(_value.isValid)
     }
     
-    func testGreaterThanErrorMessage() throws
-    {
+    func testGreaterThanErrorMessage() throws {
         @Validate(.count(greaterThan: 3)) var value: String = ""
         
         let error = try XCTUnwrap(_value.errors.first as? ValidationError)
         XCTAssertEqual(error.errorDescription, "Should be greater than 3")
     }
     
-    func testGreaterThanErrorMessageForOptional() throws
-    {
+    func testGreaterThanErrorMessageForOptional() throws {
         @Validate(.count(greaterThan: 3)) var value: String? = nil
         
         let error = try XCTUnwrap(_value.errors.first as? ValidationError)
         XCTAssertEqual(error.errorDescription, "Should be greater than 3")
     }
     
-    func testGreaterThanCustomErrorMessage() throws
-    {
+    func testGreaterThanCustomErrorMessage() throws {
         let message = "a message"
         @Validate(
             .count(
@@ -61,8 +55,7 @@ class CountValidationTests: XCTestCase
         XCTAssertEqual(error.errorDescription, message)
     }
     
-    func testGreaterThanCustomErrorMessageForOptional() throws
-    {
+    func testGreaterThanCustomErrorMessageForOptional() throws {
         let message = "a message"
         @Validate(
             .count(
@@ -78,8 +71,7 @@ class CountValidationTests: XCTestCase
 
     // MARK: Less than
     
-    func testCountLessThanValidation()
-    {
+    func testCountLessThanValidation() {
         @Validate(.count(lessThan: 3)) var value: String = "12345"
         XCTAssertFalse(_value.isValid)
 
@@ -90,8 +82,7 @@ class CountValidationTests: XCTestCase
         XCTAssert(_value.isValid)
     }
 
-    func testCountLessThanForOptionalValidation()
-    {
+    func testCountLessThanForOptionalValidation() {
         @Validate(.count(lessThan: 3)) var value: String? = nil
         XCTAssertFalse(_value.isValid)
 
@@ -102,24 +93,21 @@ class CountValidationTests: XCTestCase
         XCTAssert(_value.isValid)
     }
     
-    func testLessThanErrorMessage() throws
-    {
+    func testLessThanErrorMessage() throws {
         @Validate(.count(lessThan: 3)) var value: String = "1234"
         
         let error = try XCTUnwrap(_value.errors.first as? ValidationError)
         XCTAssertEqual(error.errorDescription, "Should be less than 3")
     }
     
-    func testLessThanErrorMessageForOptional() throws
-    {
+    func testLessThanErrorMessageForOptional() throws {
         @Validate(.count(lessThan: 3)) var value: String? = nil
         
         let error = try XCTUnwrap(_value.errors.first as? ValidationError)
         XCTAssertEqual(error.errorDescription, "Should be less than 3")
     }
     
-    func testLessThanCustomErrorMessage() throws
-    {
+    func testLessThanCustomErrorMessage() throws {
         let message = "a message"
         @Validate(
             .count(
@@ -133,8 +121,7 @@ class CountValidationTests: XCTestCase
         XCTAssertEqual(error.errorDescription, message)
     }
     
-    func testLessThanCustomErrorMessageForOptional() throws
-    {
+    func testLessThanCustomErrorMessageForOptional() throws {
         let message = "a message"
         @Validate(
             .count(
@@ -150,8 +137,7 @@ class CountValidationTests: XCTestCase
     
     // MARK: Equal
 
-    func testCountEqualToValidation()
-    {
+    func testCountEqualToValidation() {
         @Validate(.count(equalTo: 3)) var value: String = ""
         XCTAssertFalse(_value.isValid)
 
@@ -165,8 +151,7 @@ class CountValidationTests: XCTestCase
         XCTAssert(_value.isValid)
     }
 
-    func testCountEqualToForOptionalValidation()
-    {
+    func testCountEqualToForOptionalValidation() {
         @Validate(.count(equalTo: 3)) var value: String? = nil
         XCTAssertFalse(_value.isValid)
 
@@ -180,8 +165,7 @@ class CountValidationTests: XCTestCase
         XCTAssert(_value.isValid)
     }
     
-    func testEqualToErrorMessage() throws
-    {
+    func testEqualToErrorMessage() throws {
         @Validate(.count(equalTo: 3)) var value: String = ""
         XCTAssertFalse(_value.isValid)
         
@@ -189,16 +173,14 @@ class CountValidationTests: XCTestCase
         XCTAssertEqual(error.errorDescription, "Should be equal to 3")
     }
     
-    func testEqualToErrorMessageForOptional() throws
-    {
+    func testEqualToErrorMessageForOptional() throws {
         @Validate(.count(equalTo: 3)) var value: String? = nil
         
         let error = try XCTUnwrap(_value.errors.first as? ValidationError)
         XCTAssertEqual(error.errorDescription, "Should be equal to 3")
     }
     
-    func testEqualToCustomErrorMessage() throws
-    {
+    func testEqualToCustomErrorMessage() throws {
         let message = "a message"
         @Validate(
             .count(
@@ -212,8 +194,7 @@ class CountValidationTests: XCTestCase
         XCTAssertEqual(error.errorDescription, message)
     }
     
-    func testEqualToCustomErrorMessageForOptional() throws
-    {
+    func testEqualToCustomErrorMessageForOptional() throws {
         let message = "a message"
         @Validate(
             .count(
@@ -229,8 +210,7 @@ class CountValidationTests: XCTestCase
     
     // MARK: Range
 
-    func testCountRangeValidation()
-    {
+    func testCountRangeValidation() {
         @Validate(.count(in: 2...4)) var value: String = ""
         XCTAssertFalse(_value.isValid)
 
@@ -244,8 +224,7 @@ class CountValidationTests: XCTestCase
         XCTAssert(_value.isValid)
     }
 
-    func testCountRangeForOptionalValidation()
-    {
+    func testCountRangeForOptionalValidation() {
         @Validate(.count(in: 2...4)) var value: String? = nil
         XCTAssertFalse(_value.isValid)
 
@@ -259,24 +238,21 @@ class CountValidationTests: XCTestCase
         XCTAssert(_value.isValid)
     }
     
-    func testRangeErrorMessage() throws
-    {
+    func testRangeErrorMessage() throws {
         @Validate(.count(in: 2...4)) var value: String = ""
         
         let error = try XCTUnwrap(_value.errors.first as? ValidationError)
         XCTAssertEqual(error.errorDescription, "Should be between 2 and 4")
     }
     
-    func testRangeErrorMessageForOptional() throws
-    {
+    func testRangeErrorMessageForOptional() throws {
         @Validate(.count(in: 2...4)) var value: String? = nil
         
         let error = try XCTUnwrap(_value.errors.first as? ValidationError)
         XCTAssertEqual(error.errorDescription, "Should be between 2 and 4")
     }
     
-    func testRangeCustomErrorMessage() throws
-    {
+    func testRangeCustomErrorMessage() throws {
         let message = "a message"
         @Validate(
             .count(
@@ -290,8 +266,7 @@ class CountValidationTests: XCTestCase
         XCTAssertEqual(error.errorDescription, message)
     }
     
-    func testRangeCustomErrorMessageForOptional() throws
-    {
+    func testRangeCustomErrorMessageForOptional() throws {
         let message = "a message"
         @Validate(
             .count(
