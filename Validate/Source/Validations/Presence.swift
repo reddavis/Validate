@@ -1,8 +1,7 @@
 import Foundation
 
 
-public extension Validation
-{
+public extension Validation {
     /// Validate an optional value is present.
     ///
     /// If the value is nil, it is considered invalid.
@@ -11,11 +10,9 @@ public extension Validation
     /// - Returns: A Validation instance.
     static func presence<T>(
         message: String? = nil
-    ) -> Validation<Optional<T>>
-    {
+    ) -> Validation<Optional<T>> {
         .init { value in
-            if value == nil
-            {
+            if value == nil {
                 throw ValidationError.build(message: message)
             }
         }
@@ -34,16 +31,13 @@ public extension Validation
     static func presence(
         allowEmpty: Bool = false,
         message: String? = nil
-    ) -> Validation<Optional<String>>
-    {
+    ) -> Validation<Optional<String>> {
         .init { value in
-            guard let value = value else
-            {
+            guard let value = value else {
                 throw ValidationError.build(message: message)
             }
             
-            if value.isEmpty && !allowEmpty
-            {
+            if value.isEmpty && !allowEmpty {
                 throw ValidationError.build(message: message)
             }
         }
@@ -58,11 +52,9 @@ public extension Validation
     /// - Returns: A Validation instance.
     static func presence(
         message: String? = nil
-    ) -> Validation<String>
-    {
+    ) -> Validation<String> {
         .init { value in
-            if value.isEmpty
-            {
+            if value.isEmpty {
                 throw ValidationError.build(message: message)
             }
         }
@@ -73,19 +65,15 @@ public extension Validation
 
 // MARK: Error
 
-extension ValidationError
-{
-    private static func presence() -> ValidationError
-    {
+extension ValidationError {
+    private static func presence() -> ValidationError {
         .init(description: "Can't be blank")
     }
     
     // MARK: Builder
     
-    fileprivate static func build(message: String?) -> ValidationError
-    {
-        guard let message = message else
-        {
+    fileprivate static func build(message: String?) -> ValidationError {
+        guard let message = message else {
             return ValidationError.presence()
         }
         
