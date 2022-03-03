@@ -74,6 +74,28 @@ public struct Validate<Value>: DynamicProperty {
         self.init(wrappedValue: wrappedValue, validations: validations)
     }
     
+    /// Initialize a `Validate` instance.
+    /// - Parameters:
+    ///   - value: The value to validate.
+    ///   - validations: The validations.
+    public init(
+        _ value: Value,
+        validations: Validation<Value>...
+    ) {
+        self.init(wrappedValue: value, validations: validations)
+    }
+    
+    /// Initialize a `Validate` instance where Value is optional.
+    /// - Parameters:
+    ///   - value: The value to validate.
+    ///   - validations: The validations.
+    public init<T>(
+        _ value: Value,
+        validations: Validation<Value>...
+    ) where Value == Optional<T> {
+        self.init(wrappedValue: value, validations: validations)
+    }
+    
     init(
         wrappedValue: Value,
         validations: [Validation<Value>]
